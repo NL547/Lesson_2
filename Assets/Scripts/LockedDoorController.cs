@@ -31,7 +31,7 @@ public class LockedDoorController : MonoBehaviour
                             if (keyList[i].id == door.id)
                             {
                                 door.isLocked = false;
-                                door.isOpen = !door.isOpen;
+                                door.isOpen = true;
                             }
                             else
                             {
