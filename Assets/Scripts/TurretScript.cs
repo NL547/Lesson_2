@@ -14,9 +14,12 @@ public class TurretScript : MonoBehaviour
     {
         if (other.tag.Equals("Player"))
         {
-           GameObject bullet_ins =  Instantiate(bullet,bullet_hole_1.position,Quaternion.identity);
-           Bullet b = bullet_ins.GetComponent<Bullet>();
-           b.SetEnemy(other.gameObject);
+            GameObject bullet_ins1 =  Instantiate(bullet,bullet_hole_1.position,Quaternion.identity);
+            Bullet a = bullet_ins1.GetComponent<Bullet>();
+            a.SetEnemy(other.gameObject);
+            GameObject bullet_ins2 = Instantiate(bullet, bullet_hole_2.position, Quaternion.identity);
+            Bullet b = bullet_ins2.GetComponent<Bullet>();
+            b.SetEnemy(other.gameObject);
         }
     }
 

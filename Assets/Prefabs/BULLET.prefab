@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6571030622770532531}
   - component: {fileID: 2085988460352916000}
   - component: {fileID: 2269749287962514584}
+  - component: {fileID: 4663622002408274644}
   m_Layer: 0
   m_Name: BULLET
   m_TagString: BULLET
@@ -110,3 +111,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff7546bc3d7e4f4d9e4487656c3aa157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartTime: 0
+  EndTime: 0.2
+--- !u!114 &4663622002408274644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3265891239720626891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fe35758bb7eb54ba54ca9016c03aca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
