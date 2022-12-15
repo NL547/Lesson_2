@@ -25,6 +25,6 @@ public class HP : MonoBehaviour
     void OnGUI()
     {
         GUI.skin = skin;
-        GUI.Box(new Rect(7, 7, 200, 30), "Çהמנמגüו : " + hp + "/ 100");
+        GUI.Box(new Rect(7, 7, 200, 30), "Health : " + hp + "/ 100");
     }
 }

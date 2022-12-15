@@ -34,11 +34,15 @@ public class FieldOfView : MonoBehaviour
                 {
                     transform.LookAt(playerRef.transform);
                     transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+                    if (Vector3.Distance(playerRef.transform.position, transform.position) < 1.5f)
+                    {                       
+                        GetComponentInChildren<Animator>().SetTrigger("Atack");                        
+                    }
                 }
             }
             else
             {
-
+                
             }
         }
     }
