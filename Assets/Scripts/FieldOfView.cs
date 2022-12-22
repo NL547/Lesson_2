@@ -8,6 +8,8 @@ public class FieldOfView : MonoBehaviour
     public float radius;
     [Range(0, 360)]
     public float angle;
+    public float speed;
+    public float attackDistance = 1.5f;
 
     public GameObject playerRef;
 
@@ -20,6 +22,29 @@ public class FieldOfView : MonoBehaviour
     {
         playerRef = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(FOVRoutine());
+    }
+
+    void Update()
+    {
+        if (canSeePlayer == true)
+        {
+            if (Vector3.Distance(transform.position, playerRef.transform.position) < radius)
+            {
+                if (Vector3.Distance(transform.position, playerRef.transform.position) > attackDistance)
+                {
+                    transform.LookAt(playerRef.transform);
+                    transform.Translate(new Vector3(0, 0, speed * Time.deltaTime));
+                    if (Vector3.Distance(playerRef.transform.position, transform.position) < 1.5f)
+                    {                       
+                        GetComponentInChildren<Animator>().SetTrigger("Atack");                        
+                    }
+                }
+            }
+            else
+            {
+                
+            }
+        }
     }
 
     private IEnumerator FOVRoutine()
@@ -58,3 +83,4 @@ public class FieldOfView : MonoBehaviour
             canSeePlayer = false;
     }
 }
+

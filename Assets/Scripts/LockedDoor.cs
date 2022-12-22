@@ -4,39 +4,80 @@ using UnityEngine;
 
 public class LockedDoor : MonoBehaviour
 {
-    [SerializeField] float openDoor;
-    [SerializeField] float closeDoor;
-    [SerializeField] float speed = 1;
-
-    public bool isOpen;
-    public bool isLocked;
-    public int id;
-
-    public AudioClip OpenAudio;
-    public AudioClip CloseAudio;
+    public static bool doorKey;
+    public bool open;
+    public bool close;
+    public bool inTrigger;
 
     void Update()
     {
-        if (isOpen)
+        if (inTrigger)
         {
-            gameObject.GetComponent<AudioSource>().PlayOneShot(OpenAudio);
-            OpenDoor();
+            if (close)
+            {
+                if (doorKey)
+                {
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        open = true;
+                        close = false;
+                    }
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    open = false;
+                    close = true;
+                }
+            }
         }
-        else
+
+        if (inTrigger)
         {
-            gameObject.GetComponent<AudioSource>().PlayOneShot(CloseAudio);
-            CloseDoor();
+            if (open)
+            {
+                var newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 90.0f, 0.0f), Time.deltaTime * 200);
+                transform.rotation = newRot;
+            }
+            else
+            {
+                var newRot = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0.0f, 0.0f, 0.0f), Time.deltaTime * 200);
+                transform.rotation = newRot;
+            }
         }
     }
 
-    void OpenDoor()
+    void OnGUI()
     {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(transform.rotation.x, openDoor, transform.rotation.z), speed * Time.deltaTime);
-    }
-    void CloseDoor()
-    {
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(transform.rotation.x, closeDoor, transform.rotation.z), speed * Time.deltaTime);
+        if (inTrigger)
+        {
+            if (open)
+            {
+                GUI.Box(new Rect(0, 60, 200, 25), "Press E to close");
+            }
+            else
+            {
+                if (doorKey)
+                {
+                    GUI.Box(new Rect(0, 60, 200, 25), "Press E to open");
+                }
+                else
+                {
+                    GUI.Box(new Rect(0, 60, 200, 25), "Need a key!");
+                }
+            }
+        }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        inTrigger = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        inTrigger = false;
+    }
 }
 
